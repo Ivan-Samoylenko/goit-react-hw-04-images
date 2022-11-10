@@ -18,7 +18,7 @@ export function App() {
     if (!query) {
       getImages();
     }
-  }, [query, page]);
+  }, [query, page, getImages]);
 
   async function getImages() {
     setStatus('pending');
