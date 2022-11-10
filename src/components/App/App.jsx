@@ -20,7 +20,7 @@ export function App() {
 
       try {
         const data = await fetchImages(query, page);
-        const isNeededLoadMoreBtn = data.totalHits > images.length + 12;
+        const isNeededLoadMoreBtn = data.totalHits > page * 12;
 
         setImages(prev => [...prev, ...data.hits]);
         setStatus('resolved');
@@ -40,7 +40,7 @@ export function App() {
     if (!query) {
       getImages();
     }
-  }, [query, page, getImages]);
+  }, [query, page]);
 
   function handleSubmit(value) {
     setQuery(value);
