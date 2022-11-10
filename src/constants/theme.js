@@ -25,6 +25,8 @@ export const theme = {
   shadows: {
     main: 'inset 0 0 2px 1px #00aacc',
     active: 'inset 0 0 2px 1px #006688',
+    image: '0 0 2px 1px #00aacc',
+    imageHover: '0 0 3px 2px #006688',
   },
   transition: 'linear 250ms',
 };

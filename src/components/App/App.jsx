@@ -37,12 +37,16 @@ export function App() {
       }
     }
 
-    if (!query) {
+    if (query) {
       getImages();
     }
   }, [query, page]);
 
   function handleSubmit(value) {
+    if (query === value && page === 1) {
+      toast.info('You are already here');
+      return;
+    }
     setQuery(value);
     setPage(1);
     setImages([]);

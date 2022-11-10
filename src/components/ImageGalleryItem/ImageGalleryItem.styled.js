@@ -19,6 +19,19 @@ export const ListItem = styled.li`
 `;
 
 export const Image = styled.img`
+  cursor: zoom-in;
+
+  box-shadow: ${p => p.theme.shadows.image};
+
+  transition: transform ${p => p.theme.transition},
+    box-shadow ${p => p.theme.transition};
+
+  :hover {
+    transform: scale(1.01);
+
+    box-shadow: ${p => p.theme.shadows.imageHover};
+  }
+
   ${p => p.theme.mediaQueries.mobile} {
     object-fit: cover;
   }

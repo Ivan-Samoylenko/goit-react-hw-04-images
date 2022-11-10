@@ -10,7 +10,7 @@ export function Modal({ toggleModal, children }) {
   useEffect(() => {
     function handleOnEsc(event) {
       if (event.code === 'Escape') {
-        this.props.toggleModal();
+        toggleModal();
       }
     }
 
@@ -18,7 +18,7 @@ export function Modal({ toggleModal, children }) {
     return () => {
       document.removeEventListener('keydown', handleOnEsc);
     };
-  }, []);
+  }, [toggleModal]);
 
   function onBackdropClick(event) {
     if (event.target === event.currentTarget) {
