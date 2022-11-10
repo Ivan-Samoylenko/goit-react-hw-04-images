@@ -15,32 +15,32 @@ export function App() {
   const [isNeededLoadMoreBtn, setIsNeededLoadMoreBtn] = useState(false);
 
   useEffect(() => {
+    async function getImages() {
+      setStatus('pending');
+
+      try {
+        const data = await fetchImages(query, page);
+        const isNeededLoadMoreBtn = data.totalHits > images.length + 12;
+
+        setImages(prev => [...prev, ...data.hits]);
+        setStatus('resolved');
+        setIsNeededLoadMoreBtn(isNeededLoadMoreBtn);
+
+        if (data.hits.length === 0) {
+          toast.info(
+            `Nothing found for your query: "${query}", try searching for another matches.`
+          );
+        }
+      } catch {
+        setStatus('rejected');
+        toast.error('Something went wrong. Try reloading the page');
+      }
+    }
+
     if (!query) {
       getImages();
     }
   }, [query, page, getImages]);
-
-  async function getImages() {
-    setStatus('pending');
-
-    try {
-      const data = await fetchImages(query, page);
-      const isNeededLoadMoreBtn = data.totalHits > images.length + 12;
-
-      setImages(prev => [...prev, ...data.hits]);
-      setStatus('resolved');
-      setIsNeededLoadMoreBtn(isNeededLoadMoreBtn);
-
-      if (data.hits.length === 0) {
-        toast.info(
-          `Nothing found for your query: "${query}", try searching for another matches.`
-        );
-      }
-    } catch {
-      setStatus('rejected');
-      toast.error('Something went wrong. Try reloading the page');
-    }
-  }
 
   function handleSubmit(value) {
     setQuery(value);
